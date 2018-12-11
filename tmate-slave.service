@@ -1,0 +1,14 @@
+[Unit]
+Description=tmate slave
+Requires=snap.docker.dockerd
+
+[Service]
+ExecStartPre=/bin/sleep 1
+ExecStart=/snap/bin/docker run --restart=always --privileged --publish 2222:2222 --name tmate-slave tmate-slave -v -h ${YOUR_HOSTNAME}
+ExecStop=/snap/bin/docker stop tmate-slave
+ExecStopPost=/snap/bin/docker rm -f tmate-slave
+ExecReload=/snap/bin/docker restart tmate-slave
+
+[Install]
+WantedBy=multi-user.target
+
