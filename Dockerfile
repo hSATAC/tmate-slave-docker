@@ -18,8 +18,8 @@ WORKDIR /tmate-slave
 RUN ./autogen.sh && ./configure && make
 
 RUN mkdir -p keys
-RUN ssh-keygen -t rsa -f keys/ssh_host_rsa_key -N '' -E md5
-RUN ssh-keygen -t ecdsa -f keys/ssh_host_ecdsa_key -N '' -E md5
+RUN ssh-keygen -t rsa -f keys/ssh_host_rsa_key -N '' -E SHA256
+RUN ssh-keygen -t ed25519 -f keys/ssh_host_ed25519_key -N '' -E SHA256
 
 ENV LANG C.UTF-8
 
